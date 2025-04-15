@@ -1,0 +1,193 @@
+{
+  "title": "Qual Emoção Predomina em Você (INCRIVEL)?",
+  "questions": [
+    {
+      "id": 1,
+      "question": "Como você geralmente reage a uma notícia completamente inesperada?",
+      "options": [
+        {
+          "id": 1,
+          "name": "Com otimismo! Vejo como uma nova aventura ou oportunidade divertida.",
+          "alias": "A"
+        },
+        {
+          "id": 2,
+          "name": "Fico um pouco pra baixo ou penso em como isso pode complicar as coisas.",
+          "alias": "B"
+        },
+        {
+          "id": 3,
+          "name": "Me irrito! Não gosto quando as coisas saem do planejado ou parecem injustas.",
+          "alias": "C"
+        },
+        {
+          "id": 4,
+          "name": "Com preocupação. Penso logo nos possíveis problemas e riscos.",
+          "alias": "D"
+        },
+        {
+          "id": 5,
+          "name": "Com desconfiança ou crítica. Analiso se a notícia é boa ou ruim, meio 'eca'.",
+          "alias": "E"
+        },
+        {
+          "id": 6,
+          "name": "Com curiosidade! Quero saber todos os detalhes e o que vai acontecer.",
+          "alias": "F"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "question": "Que tipo de filme ou história mais te atrai?",
+      "options": [
+        {
+          "id": 1,
+          "name": "Comédias, aventuras com final feliz, algo para cima!",
+          "alias": "A"
+        },
+        {
+          "id": 2,
+          "name": "Dramas emocionantes, histórias de superação, romances profundos.",
+          "alias": "B"
+        },
+        {
+          "id": 3,
+          "name": "Ação intensa, filmes de vingança ou sobre injustiças sociais.",
+          "alias": "C"
+        },
+        {
+          "id": 4,
+          "name": "Suspense psicológico, terror, mistérios que me deixam tenso(a).",
+          "alias": "D"
+        },
+        {
+          "id": 5,
+          "name": "Documentários críticos, sátiras inteligentes, filmes com uma estética impecável.",
+          "alias": "E"
+        },
+        {
+          "id": 6,
+          "name": "Ficção científica com reviravoltas, fantasia com mundos únicos, algo que me surpreenda.",
+          "alias": "F"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "question": "Ao enfrentar um problema ou obstáculo, qual sua primeira reação?",
+      "options": [
+        {
+          "id": 1,
+          "name": "Encarar com bom humor e buscar soluções criativas, focado(a) no lado bom.",
+          "alias": "A"
+        },
+        {
+          "id": 2,
+          "name": "Sentir um desânimo, pensar nas dificuldades e talvez me isolar um pouco.",
+          "alias": "B"
+        },
+        {
+          "id": 3,
+          "name": "Ficar com raiva do problema ou de quem o causou, querer 'lutar' contra.",
+          "alias": "C"
+        },
+        {
+          "id": 4,
+          "name": "Sentir ansiedade, me preocupar com o que pode dar errado, buscar segurança.",
+          "alias": "D"
+        },
+        {
+          "id": 5,
+          "name": "Analisar criticamente a situação, achar 'nojento' ou 'errado' e querer distância.",
+          "alias": "E"
+        },
+        {
+          "id": 6,
+          "name": "Ficar intrigado(a) pelo desafio, analisar de forma curiosa e buscar ângulos diferentes.",
+          "alias": "F"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "question": "Em qual tipo de ambiente social você se sente mais 'você mesmo(a)'?",
+      "options": [
+        {
+          "id": 1,
+          "name": "Festas grandes e animadas, rodeado(a) de amigos e muita energia.",
+          "alias": "A"
+        },
+        {
+          "id": 2,
+          "name": "Conversas profundas e tranquilas com amigos próximos, em um lugar calmo.",
+          "alias": "B"
+        },
+        {
+          "id": 3,
+          "name": "Competições, debates sobre temas importantes, lugares com muita paixão.",
+          "alias": "C"
+        },
+        {
+          "id": 4,
+          "name": "Em casa ou em lugares familiares e seguros, com pessoas que já conheço bem.",
+          "alias": "D"
+        },
+        {
+          "id": 5,
+          "name": "Eventos selecionados, lugares com um padrão elevado, ambientes limpos e organizados.",
+          "alias": "E"
+        },
+        {
+          "id": 6,
+          "name": "Lugares novos e diferentes, eventos com temas inusitados, conhecendo gente nova.",
+          "alias": "F"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "question": "Se você fosse uma paleta de cores, qual seria?",
+      "options": [
+        {
+          "id": 1,
+          "name": "Amarelo vibrante, laranja, dourado - cores quentes e alegres.",
+          "alias": "A"
+        },
+        {
+          "id": 2,
+          "name": "Azul profundo, cinza, tons de lilás - cores suaves e melancólicas.",
+          "alias": "B"
+        },
+        {
+          "id": 3,
+          "name": "Vermelho intenso, preto, vinho - cores fortes e marcantes.",
+          "alias": "C"
+        },
+        {
+          "id": 4,
+          "name": "Roxo escuro, verde musgo, marrom - cores sóbrias e misteriosas.",
+          "alias": "D"
+        },
+        {
+          "id": 5,
+          "name": "Verde claro, branco puro, tons pastéis 'clean' - cores específicas e definidas.",
+          "alias": "E"
+        },
+        {
+          "id": 6,
+          "name": "Cores neon, combinações inusitadas, furta-cor - algo chamativo e diferente.",
+          "alias": "F"
+        }
+      ]
+    }
+  ],
+  "results": {
+    "A": "Sua emoção predominante é a Alegria Contagiante!",
+    "B": "Sua emoção predominante é a Tristeza Reflexiva!",
+    "C": "Sua emoção predominante é a Raiva Protetora!",
+    "D": "Sua emoção predominante é o Medo Cauteloso!",
+    "E": "Sua emoção predominante é o Nojinho Seletivo!",
+    "F": "Sua emoção predominante é a Surpresa Curiosa!"
+  }
+}
