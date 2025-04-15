@@ -8,6 +8,15 @@
   ],
   "routes": [
     {
+      "src": "/quizz",
+      "dest": "/api/server.js"
+    },
+    {
+      "src": "/update",
+      "dest": "/api/server.js",
+      "methods": ["PUT"]
+    },
+    {
       "src": "/(.*)",
       "dest": "/api/server.js"
     }
