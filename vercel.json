@@ -9,16 +9,29 @@
   "routes": [
     {
       "src": "/quizz",
-      "dest": "/api/server.js"
+      "dest": "/api/server.js",
+      "headers": {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "Access-Control-Allow-Headers": "X-Requested-With, Content-Type, Accept"
+      }
     },
     {
       "src": "/update",
       "dest": "/api/server.js",
-      "methods": ["PUT"]
+      "methods": ["PUT", "OPTIONS"],
+      "headers": {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "Access-Control-Allow-Headers": "X-Requested-With, Content-Type, Accept"
+      }
     },
     {
       "src": "/(.*)",
-      "dest": "/api/server.js"
+      "dest": "/api/server.js",
+      "headers": {
+        "Access-Control-Allow-Origin": "*"
+      }
     }
   ]
 }
