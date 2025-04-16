@@ -1,48 +1,45 @@
-# node-api-quizz
-Api de envio e gravação de json para o angular quizz_buzzfeed
+# Quiz API
 
-## Deploy JSON Server to Vercel
+API RESTful para um quiz de emoções, construída com JSON Server.
 
-A template to deploy [JSON Server](https://github.com/typicode/json-server) to [Vercel](https://vercel.com), allow you to run fake REST API online!
+## Endpoints
 
-Demo from this repository: 
+- `GET /quizz` - Retorna todas as questões e resultados do quiz
+- `PUT /update` - Atualiza as questões do quiz
 
-1. https://json-server-in.vercel.app
-2. https://json-server-in.vercel.app/api/posts
+## Desenvolvimento Local
 
-![Powered by Vercel](https://images.ctfassets.net/e5382hct74si/78Olo8EZRdUlcDUFQvnzG7/fa4cdb6dc04c40fceac194134788a0e2/1618983297-powered-by-vercel.svg)
-
-### How to use
-
-1. Click "**Use this template**" or clone this repository.
-2. Update or use the default [`db.json`](./db.json) in the repository.
-3. Sign Up or login into [Vercel](https://vercel.com).
-4. From the Vercel dashboard, click "**+ New Project**" then "**Import**" your repository.
-5. In the "**Configure Project**" screen, leave everything default and click "**Deploy**".
-6. Wait until deployment is done, and your own JSON server is ready to serve!
-
-## Default `db.json`
-
-```json
-{
-  "posts": [
-    { "id": 1, "title": "json-server", "author": "typicode" }
-  ],
-  "comments": [
-    { "id": 1, "body": "some comment", "postId": 1 }
-  ],
-  "profile": { "name": "typicode" }
-}
+1. Clone o repositório
+2. Instale as dependências:
+```bash
+npm install
+```
+3. Inicie o servidor em modo desenvolvimento:
+```bash
+npm run dev-win
 ```
 
-## Enable write operations
+O servidor estará rodando em http://localhost:3000
 
-By default, only GET operation is allowed, thanks to the contribution by [@VicAv99](https://www.github.com/VicAv99) at [#6](https://github.com/kitloong/json-server-vercel/issues/6), we can now enable write operations as well.
+## Deploy no Render
 
-You can find the example code in [`api/server.js`](./api/server.js).
+1. Faça fork deste repositório para sua conta GitHub
+2. Acesse [render.com](https://render.com) e crie uma conta
+3. No dashboard do Render, clique em "New +" e selecione "Web Service"
+4. Conecte sua conta GitHub e selecione o repositório
+5. Configure o serviço:
+   - Name: escolha um nome para seu serviço
+   - Region: escolha a região mais próxima
+   - Branch: main
+   - Runtime: Docker
+   - Instance Type: Free
+   - Build Command: deixe em branco (usa Dockerfile)
+   - Start Command: deixe em branco (usa Dockerfile)
 
-## Reference
+O Render irá automaticamente detectar o Dockerfile e fazer o deploy.
 
-1. https://github.com/typicode/json-server
-2. https://vercel.com
-3. https://shadowsmith.com/how-to-deploy-an-express-api-to-vercel
+## Tecnologias
+
+- Node.js
+- JSON Server
+- Docker

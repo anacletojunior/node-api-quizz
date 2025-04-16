@@ -1,76 +1,120 @@
-// See https://github.com/typicode/json-server#module
 const jsonServer = require('json-server')
-const fs = require('fs')
 const path = require('path')
 const cors = require('cors')
+const fs = require('fs')
 
 const server = jsonServer.create()
 
-// Importando diretamente o arquivo JSON para uso na Vercel
-// Isso evita problemas com sistema de arquivos somente leitura
-const quizzData = require('../quizz_questions.json')
-
-// Configuração do JSON Server
-const router = jsonServer.router(quizzData)
-const middlewares = jsonServer.defaults()
-
-// Habilitar CORS para todas as origens
-server.use(cors({
-  origin: '*',
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
-}))
-
-server.use(middlewares)
-
-// Middleware para processar o body das requisições
-server.use(jsonServer.bodyParser)
-
-// Endpoint personalizado para atualizar quizz_questions.json
-// Na Vercel, não podemos escrever em arquivos diretamente, então isso funcionará apenas em desenvolvimento local
-server.put('/update', (req, res) => {
-  try {
-    // Verificando se estamos em ambiente de produção (Vercel)
-    if (process.env.VERCEL) {
-      // No Vercel, podemos apenas simular uma atualização para a sessão atual
-      Object.assign(quizzData, req.body)
-      res.status(200).json({ success: true, message: 'Quiz atualizado na memória (ambiente Vercel)' })
-    } else {
-      // Em ambiente local, podemos escrever no arquivo
-      const quizPath = path.join('quizz_questions.json')
-      fs.writeFileSync(quizPath, JSON.stringify(req.body, null, 2), 'utf-8')
-      res.status(200).json({ success: true, message: 'Quiz atualizado com sucesso!' })
+// Função para validar a estrutura do JSON
+function validateQuizJson(data) {
+  const requiredFields = ['title', 'questions', 'results']
+  for (const field of requiredFields) {
+    if (!data[field]) {
+      throw new Error(`Campo obrigatório '${field}' está faltando`)
     }
-  } catch (error) {
-    res.status(500).json({ success: false, message: 'Erro ao atualizar o quiz', error: error.message })
   }
-})
-
-// Endpoint para obter o conteúdo do quizz_questions.json
-server.get('/quizz', (req, res) => {
-  try {
-    // Retornamos os dados diretamente da variável, sem ler o arquivo
-    res.status(200).json(quizzData)
-  } catch (error) {
-    res.status(500).json({ success: false, message: 'Erro ao ler o quiz', error: error.message })
+  
+  if (!Array.isArray(data.questions)) {
+    throw new Error("O campo 'questions' deve ser um array")
   }
-})
-
-// Log de todas as requisições
-server.use((req, res, next) => {
-  console.log(`${req.method} ${req.path}`)
-  next()
-})
-
-// Use default router
-server.use(router)
-
-// Para desenvolvimento local
-if (process.env.NODE_ENV !== 'production') {
-  server.listen(3000, () => {
-    console.log('JSON Server is running on port 3000')
-  })
+  
+  if (typeof data.results !== 'object') {
+    throw new Error("O campo 'results' deve ser um objeto")
+  }
 }
 
-// Export the Server API
-module.exports = server
+// Função para ler o arquivo JSON
+function readJsonFile() {
+  const dbPath = path.join(__dirname, '..', 'quizz_questions.json')
+  const data = fs.readFileSync(dbPath, 'utf8')
+  try {
+    return JSON.parse(data)
+  } catch (error) {
+    console.error('Erro ao fazer parse do JSON:', error)
+    throw new Error('Erro ao ler arquivo JSON')
+  }
+}
+
+// Função para escrever no arquivo JSON
+function writeJsonFile(data) {
+  const dbPath = path.join(__dirname, '..', 'quizz_questions.json')
+  fs.writeFileSync(dbPath, JSON.stringify(data, null, 2), 'utf8')
+}
+
+// Inicializa os dados
+let quizData = readJsonFile()
+
+// Habilitar CORS
+server.use(cors())
+
+// Usar middlewares padrão
+server.use(jsonServer.defaults())
+
+// Configurar body-parser com limite maior e tratamento de erros
+server.use(jsonServer.bodyParser)
+
+// Rota para obter o quiz
+server.get('/quizz', (req, res) => {
+  try {
+    quizData = readJsonFile()
+    res.json(quizData)
+  } catch (error) {
+    console.error('Erro no GET /quizz:', error)
+    res.status(500).json({ 
+      success: false, 
+      message: 'Erro ao ler o quiz',
+      error: error.message 
+    })
+  }
+})
+
+// Middleware para validar JSON antes do update
+server.use('/update', (req, res, next) => {
+  console.log('Corpo da requisição recebido:', JSON.stringify(req.body, null, 2))
+  
+  try {
+    // Verifica se o body é um objeto válido
+    if (typeof req.body !== 'object' || req.body === null) {
+      throw new Error('Body inválido: deve ser um objeto JSON')
+    }
+    
+    // Valida a estrutura do JSON
+    validateQuizJson(req.body)
+    next()
+  } catch (error) {
+    console.error('Erro na validação do JSON:', error)
+    res.status(400).json({ 
+      success: false, 
+      message: 'JSON inválido',
+      error: error.message 
+    })
+  }
+})
+
+// Rota para atualizar o quiz
+server.put('/update', (req, res) => {
+  try {
+    // Atualiza os dados em memória e no arquivo
+    quizData = req.body
+    writeJsonFile(quizData)
+    
+    res.json({ 
+      success: true, 
+      message: 'Quiz atualizado com sucesso!',
+      data: quizData
+    }) 
+  } catch (error) {
+    console.error('Erro no PUT /update:', error)
+    res.status(500).json({ 
+      success: false, 
+      message: 'Erro ao atualizar o quiz', 
+      error: error.message 
+    })
+  }
+})
+
+// Inicia o servidor
+const PORT = process.env.PORT || 3000
+server.listen(PORT, () => {
+  console.log(`JSON Server está rodando em http://localhost:${PORT}`)
+})
